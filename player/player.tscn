@@ -1,0 +1,195 @@
+[gd_scene format=3 uid="uid://vqmk888lbu0c"]
+
+[ext_resource type="Texture2D" uid="uid://yh5rig65e0no" path="res://Rick the Hamster Kirby 64/Drawings/East.png" id="1_g4c7l"]
+[ext_resource type="Script" uid="uid://bsm4uw06nii4v" path="res://player/player.gd" id="1_knn7v"]
+[ext_resource type="Texture2D" uid="uid://doxu5hhyucd17" path="res://Rick the Hamster Kirby 64/Drawings/East 3.png" id="2_knn7v"]
+[ext_resource type="Texture2D" uid="uid://bq8umw4b0mcn" path="res://Rick the Hamster Kirby 64/Drawings/East 2.png" id="3_7pqkx"]
+[ext_resource type="Texture2D" uid="uid://dw1o4sxmbjjn4" path="res://Rick the Hamster Kirby 64/Drawings/North.png" id="4_uw77l"]
+[ext_resource type="Texture2D" uid="uid://dquu087uvnmbw" path="res://Rick the Hamster Kirby 64/Drawings/North 2.png" id="5_rptt4"]
+[ext_resource type="Texture2D" uid="uid://b5dtsfc4b7xod" path="res://Rick the Hamster Kirby 64/Drawings/North 3.png" id="6_r7pn3"]
+[ext_resource type="Texture2D" uid="uid://bu7n44c47dt6o" path="res://Rick the Hamster Kirby 64/Drawings/Northeast.png" id="7_b8hi5"]
+[ext_resource type="Texture2D" uid="uid://duntgxw2mo2my" path="res://Rick the Hamster Kirby 64/Drawings/Northeast 2.png" id="8_2uvqg"]
+[ext_resource type="Texture2D" uid="uid://ood3udrl4xa7" path="res://Rick the Hamster Kirby 64/Drawings/Northeast 3.png" id="9_1s1yo"]
+[ext_resource type="Texture2D" uid="uid://d0woptxrn7sxu" path="res://Rick the Hamster Kirby 64/Drawings/Northwest.png" id="10_5ejfk"]
+[ext_resource type="Texture2D" uid="uid://bsyguc0r1utt5" path="res://Rick the Hamster Kirby 64/Drawings/Northwest 2.png" id="11_jd2rm"]
+[ext_resource type="Texture2D" uid="uid://bqt4kqigkb74v" path="res://Rick the Hamster Kirby 64/Drawings/Northwest 3.png" id="12_q28gw"]
+[ext_resource type="Texture2D" uid="uid://cujvk5n3108kn" path="res://Rick the Hamster Kirby 64/Drawings/South.png" id="13_ge24q"]
+[ext_resource type="Texture2D" uid="uid://cfemj4bebsjdq" path="res://Rick the Hamster Kirby 64/Drawings/South 2.png" id="14_pnw6m"]
+[ext_resource type="Texture2D" uid="uid://bs6cuhsaqmgxp" path="res://Rick the Hamster Kirby 64/Drawings/South 3.png" id="15_1so5t"]
+[ext_resource type="Texture2D" uid="uid://dakg68ofxyhun" path="res://Rick the Hamster Kirby 64/Drawings/Southeast.png" id="16_55jnj"]
+[ext_resource type="Texture2D" uid="uid://c0sff0dofit6m" path="res://Rick the Hamster Kirby 64/Drawings/Southeast 2.png" id="17_dx5ib"]
+[ext_resource type="Texture2D" uid="uid://dh4xhwyjp83st" path="res://Rick the Hamster Kirby 64/Drawings/Southeast 3.png" id="18_a2xo5"]
+[ext_resource type="Texture2D" uid="uid://cx8cvpttcx18x" path="res://Rick the Hamster Kirby 64/Drawings/Southwest.png" id="19_art4l"]
+[ext_resource type="Texture2D" uid="uid://vwby6xbt4l8t" path="res://Rick the Hamster Kirby 64/Drawings/Southwest 2.png" id="20_fjxoa"]
+[ext_resource type="Texture2D" uid="uid://mqbu4n4ml0nk" path="res://Rick the Hamster Kirby 64/Drawings/Southwest 3.png" id="21_gswnw"]
+[ext_resource type="Texture2D" uid="uid://ut3wtoqxjlpw" path="res://Rick the Hamster Kirby 64/Drawings/West.png" id="22_xcnuv"]
+[ext_resource type="Texture2D" uid="uid://bam2jovin18cx" path="res://Rick the Hamster Kirby 64/Drawings/West 2.png" id="23_j55il"]
+[ext_resource type="Texture2D" uid="uid://bwycbgsqso0s6" path="res://Rick the Hamster Kirby 64/Drawings/West 3.png" id="24_hjies"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mmwog"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_g4c7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_knn7v")
+}, {
+"duration": 1.0,
+"texture": ExtResource("1_g4c7l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_7pqkx")
+}],
+"loop": true,
+"name": &"east",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_uw77l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_rptt4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_uw77l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_r7pn3")
+}],
+"loop": true,
+"name": &"north",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_b8hi5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_2uvqg")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_b8hi5")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_1s1yo")
+}],
+"loop": true,
+"name": &"northeast",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("10_5ejfk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_jd2rm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_5ejfk")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_q28gw")
+}],
+"loop": true,
+"name": &"northwest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("13_ge24q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("14_pnw6m")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_ge24q")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_1so5t")
+}],
+"loop": true,
+"name": &"south",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("16_55jnj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_dx5ib")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_55jnj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_a2xo5")
+}],
+"loop": true,
+"name": &"southeast",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("19_art4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("20_fjxoa")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_art4l")
+}, {
+"duration": 1.0,
+"texture": ExtResource("21_gswnw")
+}],
+"loop": true,
+"name": &"southwest",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("22_xcnuv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("23_j55il")
+}, {
+"duration": 1.0,
+"texture": ExtResource("22_xcnuv")
+}, {
+"duration": 1.0,
+"texture": ExtResource("24_hjies")
+}],
+"loop": true,
+"name": &"west",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8pxes"]
+
+[node name="Player" type="CharacterBody3D" unique_id=791315332]
+script = ExtResource("1_knn7v")
+
+[node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=1423912300]
+shaded = true
+double_sided = false
+sprite_frames = SubResource("SpriteFrames_mmwog")
+animation = &"west"
+frame = 1
+frame_progress = 0.66875535
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=1113271361]
+shape = SubResource("CapsuleShape3D_8pxes")
+
+[node name="RayCast3D" type="RayCast3D" parent="." unique_id=341140028]
+transform = Transform3D(0.70710665, 0, -0.7071069, 0, 1, 0, 0.7071069, 0, 0.70710665, 2.0888762, 0, 2.1837916)
+target_position = Vector3(0, 0, -1)
+
+[node name="CameraPivot" type="Node3D" parent="." unique_id=1316340489]
+unique_name_in_owner = true
+
+[node name="SpringArm" type="SpringArm3D" parent="CameraPivot" unique_id=18830901]
+spring_length = 5.0
+
+[node name="Camera" type="Camera3D" parent="CameraPivot/SpringArm" unique_id=901035996]
+unique_name_in_owner = true
