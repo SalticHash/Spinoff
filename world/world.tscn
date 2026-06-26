@@ -30,6 +30,12 @@ albedo_color = Color(0.68365556, 1, 0.62206566, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6xmxd"]
 albedo_color = Color(1, 0.29803923, 0.21568628, 1)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5o24"]
+albedo_color = Color(0.9999996, 0.7766452, 0.47839224, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mmdvd"]
+albedo_color = Color(0.9999996, 0.7766452, 0.47839224, 1)
+
 [node name="World" type="Node3D" unique_id=200949558]
 script = ExtResource("1_4717r")
 
@@ -87,6 +93,22 @@ radius = 2.81
 [node name="CSGSphere3D3" type="CSGSphere3D" parent="CSGCombiner3D" unique_id=221349001]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 94.8827, 0, -5.6417847)
 radius = 2.81
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D" unique_id=1729131448]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6311408, 3.5063782, 0)
+size = Vector3(0.5233154, 8.012756, 1)
+material = SubResource("StandardMaterial3D_h5o24")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D" unique_id=2062200134]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.6311408, -0.9114809, 0)
+size = Vector3(0.928, 0.763, 5.63)
+material = SubResource("StandardMaterial3D_h5o24")
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGCombiner3D" unique_id=717474466]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 1.4044366, 3.5632668, 0)
+radius = 0.17
+height = 0.695
+material = SubResource("StandardMaterial3D_mmdvd")
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=615469034]
 transform = Transform3D(-0.3255681, 0.28432292, -0.9017571, 0, 0.95371693, 0.3007058, 0.9455186, 0.09790022, -0.31049982, -8.815, 5.17, -3.635)

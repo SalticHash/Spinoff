@@ -1,48 +1,51 @@
 extends CharacterBody3D
 
-const RISE_GRAVITY = -30
-const FALL_GRAVITY = -70
-const SPEED = 5.0
+const RISE_GRAVITY: float = -30
+const FALL_GRAVITY: float = -70
+const SPEED: float = 5.0
 
-const ACCEL = 15.0
-const DECEL = 15.0
-const AIR_ACCEL = 2.0
-const AIR_DECEL = 2.0
+const ACCEL: float = 15.0
+const DECEL: float = 15.0
+const AIR_ACCEL: float = 2.0
+const AIR_DECEL: float = 2.0
 
-const MAX_TURN_SPEED = 1.25
-const TURN_ACCEL = 0.02
-const TURN_DECEL = 0.08
-const AIR_TURN_ACCEL = 0.006
-const AIR_TURN_DECEL = 0.015
-var turn_speed = 0.0
+const MAX_TURN_SPEED: float = 1.25
+const TURN_ACCEL: float = 0.02
+const TURN_DECEL: float = 0.08
+const AIR_TURN_ACCEL: float = 0.006
+const AIR_TURN_DECEL: float = 0.015
+var turn_speed: float = 0.0
 
 const JUMP_VELOCITY = 16
 
-const MAX_SPEED = 32
+const MAX_SPEED: float = 32.0
 var speed: float = 0.0
 var last_dir: float = 1.0
-var locked = true
+var locked: bool = true
 
-var jump_buffer = 0.0
-const JUMP_BUFFER = 0.25
-var floor_buffer = 0.0
-const FLOOR_BUFFER = 0.25
+var jump_buffer: float = 0.0
+const JUMP_BUFFER: float = 0.25
+var floor_buffer: float = 0.0
+const FLOOR_BUFFER: float = 0.25
 func animate(delta: float) -> void:
 	$HamsterWheel.rotate_x(speed * PI / 32 * delta)
 	$Sprite.walking = speed != 0
 	var rot = create_tween()
 	rot.tween_property($Sprite, "rotation_degrees", Vector3(0, 0 if last_dir == 1 else 180, 0), 0.2)
-	$Sprite.walk_speed = remap(abs(speed), 0, MAX_SPEED, 0.2, 0.025)
+	$Sprite.walk_speed = clamp(remap(abs(speed), 0, MAX_SPEED, 0.2, 0.025), 0.025, 0.2)
 
 var was_on_floor: bool = true
 var last_floor_position: Vector3 = Vector3.ZERO
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("jump"):
+	if speed >= MAX_SPEED * 1.5:
 		locked = false
 		_camera.make_current()
 	
 	if is_on_floor() and !was_on_floor:
 		if jump_buffer <= 0 and floor_buffer <= 0:
+			$Sprite/AnimationPlayer.stop()
+			$Sprite/AnimationPlayer.speed_scale = 1.0
+			
 			$Sprite/AnimationPlayer.play("squash")
 			$LandSound.play()
 		$LandWheelSound.play()
@@ -62,6 +65,15 @@ func _physics_process(delta: float) -> void:
 		speed = 0.0
 		turn_speed = 0.0
 #
+
+	if abs(speed) > 0.0 and is_on_floor():
+		$Sprite/AnimationPlayer.speed_scale = remap(abs(speed), 0.0, MAX_SPEED, 0.1, 1.0)
+		if !$Sprite/AnimationPlayer.is_playing() and $Sprite/AnimationPlayer.current_animation != "hops":
+			$Sprite/AnimationPlayer.play("hops")
+	else:
+		if $Sprite/AnimationPlayer.current_animation == "hops":
+			$Sprite/AnimationPlayer.stop()
+			
 	## Handle jump.
 	if is_on_floor(): floor_buffer = FLOOR_BUFFER
 	if Input.is_action_just_pressed("jump"): jump_buffer = JUMP_BUFFER
@@ -69,6 +81,10 @@ func _physics_process(delta: float) -> void:
 		velocity.y = JUMP_VELOCITY
 		jump_buffer = 0
 		floor_buffer = 0
+		$Sprite/AnimationPlayer.stop()
+		$Sprite/AnimationPlayer.speed_scale = 0.7
+		
+		$Sprite/AnimationPlayer.advance(0)
 		$Sprite/AnimationPlayer.play("strech")
 		$JumpSound.play()
 	if floor_buffer > 0: floor_buffer -= delta
@@ -105,6 +121,8 @@ func _physics_process(delta: float) -> void:
 	else:
 		if abs(speed) + abs(turn_speed) != 0.0 or is_on_floor(): $RollSound.play()
 	animate(delta)
+	
+		
 		
 	var direction := (transform.basis * Vector3.BACK).normalized()
 	velocity.x = direction.x * speed

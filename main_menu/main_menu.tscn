@@ -25,3 +25,5 @@ offset_bottom = 15.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "Play"
+
+[connection signal="pressed" from="StartGame" to="." method="_on_start_game_pressed"]
