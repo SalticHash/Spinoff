@@ -26,6 +26,20 @@
 [ext_resource type="Texture2D" uid="uid://bam2jovin18cx" path="res://Rick the Hamster Kirby 64/Drawings/West 2.png" id="23_j55il"]
 [ext_resource type="Texture2D" uid="uid://bwycbgsqso0s6" path="res://Rick the Hamster Kirby 64/Drawings/West 3.png" id="24_hjies"]
 [ext_resource type="Script" uid="uid://cibehqpu05wss" path="res://player/sprite.gd" id="26_7pqkx"]
+[ext_resource type="AudioStream" uid="uid://nt0k7686dult" path="res://player/sounds/jump/1.wav" id="27_1s1yo"]
+[ext_resource type="AudioStream" uid="uid://b5nk5r06ettha" path="res://player/sounds/jump/2.wav" id="28_5ejfk"]
+[ext_resource type="AudioStream" uid="uid://btyagn4451hss" path="res://player/sounds/jump/3.wav" id="29_jd2rm"]
+[ext_resource type="AudioStream" uid="uid://gwmjwm3bqqef" path="res://player/sounds/step.wav" id="30_dx5ib"]
+[ext_resource type="AudioStream" uid="uid://bpvla8c6o1235" path="res://player/sounds/land_wheel/0.ogg" id="30_ge24q"]
+[ext_resource type="AudioStream" uid="uid://c24uxrne4bwtk" path="res://player/sounds/land/1.wav" id="30_q28gw"]
+[ext_resource type="AudioStream" uid="uid://dvv5dg0h88om" path="res://player/sounds/land/2.wav" id="31_ge24q"]
+[ext_resource type="AudioStream" uid="uid://pm805p434a0f" path="res://player/sounds/land_wheel/1.ogg" id="31_pnw6m"]
+[ext_resource type="AudioStream" uid="uid://bj4iwi41j17xa" path="res://player/sounds/land_wheel/2.ogg" id="32_1so5t"]
+[ext_resource type="AudioStream" uid="uid://bavy2kwps4tvj" path="res://player/sounds/land/3.wav" id="32_pnw6m"]
+[ext_resource type="AudioStream" uid="uid://raj5q1b8y4xr" path="res://player/sounds/roll.mp3" id="33_5ejfk"]
+[ext_resource type="AudioStream" uid="uid://dffhehwbwjdf0" path="res://player/sounds/land_wheel/3.ogg" id="33_55jnj"]
+[ext_resource type="AudioStream" uid="uid://cb5jd82u0tjde" path="res://player/sounds/land_wheel/4.ogg" id="34_dx5ib"]
+[ext_resource type="AudioStream" uid="uid://b07knxxpnfhra" path="res://player/sounds/land_wheel/5.ogg" id="35_a2xo5"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mmwog"]
 animations = [{
@@ -42,7 +56,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("3_7pqkx")
 }],
-"loop": true,
+"loop": 1,
 "name": &"east",
 "speed": 5.0
 }, {
@@ -59,7 +73,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_r7pn3")
 }],
-"loop": true,
+"loop": 1,
 "name": &"north",
 "speed": 5.0
 }, {
@@ -76,7 +90,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("9_1s1yo")
 }],
-"loop": true,
+"loop": 1,
 "name": &"northeast",
 "speed": 5.0
 }, {
@@ -93,7 +107,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("12_q28gw")
 }],
-"loop": true,
+"loop": 1,
 "name": &"northwest",
 "speed": 5.0
 }, {
@@ -110,7 +124,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("15_1so5t")
 }],
-"loop": true,
+"loop": 1,
 "name": &"south",
 "speed": 5.0
 }, {
@@ -127,7 +141,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("18_a2xo5")
 }],
-"loop": true,
+"loop": 1,
 "name": &"southeast",
 "speed": 5.0
 }, {
@@ -144,7 +158,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("21_gswnw")
 }],
-"loop": true,
+"loop": 1,
 "name": &"southwest",
 "speed": 5.0
 }, {
@@ -161,7 +175,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("24_hjies")
 }],
-"loop": true,
+"loop": 1,
 "name": &"west",
 "speed": 5.0
 }]
@@ -170,6 +184,98 @@ animations = [{
 top_radius = 0.0
 bottom_radius = 0.26
 height = 1.385
+
+[sub_resource type="Animation" id="Animation_7pqkx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 1.6886349, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_uw77l"]
+resource_name = "squash"
+length = 0.25
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 0.8, 1), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.25),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.438, 0), Vector3(0, 1.6886349, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_rptt4"]
+resource_name = "strech"
+length = 0.75
+step = 0.125
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1.2, 1), Vector3(1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.75),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 1.923, 0), Vector3(0, 1.6886349, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rptt4"]
+_data = {
+&"RESET": SubResource("Animation_7pqkx"),
+&"squash": SubResource("Animation_uw77l"),
+&"strech": SubResource("Animation_rptt4")
+}
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_7pqkx"]
 height = 2.38
@@ -278,7 +384,59 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_y0mmg")
 
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jh3y0"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("27_1s1yo")
+stream_1/stream = ExtResource("28_5ejfk")
+stream_2/stream = ExtResource("29_jd2rm")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_a2xo5"]
+random_pitch = 1.122462
+streams_count = 1
+stream_0/stream = ExtResource("30_dx5ib")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_1so5t"]
+random_pitch = 1.0594631
+streams_count = 3
+stream_0/stream = ExtResource("30_q28gw")
+stream_1/stream = ExtResource("31_ge24q")
+stream_2/stream = ExtResource("32_pnw6m")
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_55jnj"]
+random_pitch = 1.0905077
+streams_count = 6
+stream_0/stream = ExtResource("30_ge24q")
+stream_1/stream = ExtResource("31_pnw6m")
+stream_2/stream = ExtResource("32_1so5t")
+stream_3/stream = ExtResource("33_55jnj")
+stream_4/stream = ExtResource("34_dx5ib")
+stream_5/stream = ExtResource("35_a2xo5")
+
+[sub_resource type="Curve" id="Curve_5ejfk"]
+_data = [Vector2(0.61153847, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_5ejfk"]
+curve = SubResource("Curve_5ejfk")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_jh3y0"]
+emission_shape = 3
+emission_box_extents = Vector3(1, 0, 0)
+gravity = Vector3(0, 2, 0)
+scale_min = 0.25
+scale_curve = SubResource("CurveTexture_5ejfk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5ejfk"]
+shading_mode = 0
+
+[sub_resource type="SphereMesh" id="SphereMesh_1d8oa"]
+material = SubResource("StandardMaterial3D_5ejfk")
+radius = 0.2
+height = 0.4
+
 [node name="Player" type="CharacterBody3D" unique_id=791315332]
+collision_layer = 2
 script = ExtResource("1_knn7v")
 
 [node name="Sprite" type="AnimatedSprite3D" parent="." unique_id=1423912300]
@@ -287,6 +445,7 @@ billboard = 2
 shaded = true
 double_sided = false
 alpha_cut = 2
+texture_filter = 0
 sprite_frames = SubResource("SpriteFrames_mmwog")
 animation = &"south"
 script = ExtResource("26_7pqkx")
@@ -294,6 +453,9 @@ script = ExtResource("26_7pqkx")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Sprite" unique_id=1758570639]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 1.1369371)
 mesh = SubResource("CylinderMesh_knn7v")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite" unique_id=1434952131]
+libraries/ = SubResource("AnimationLibrary_rptt4")
 
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=1113271361]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 3.5, 0)
@@ -305,15 +467,12 @@ target_position = Vector3(0, 0, -1)
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1316340489]
 unique_name_in_owner = true
+transform = Transform3D(-0.3826834, 0.16043, -0.90984374, 0, 0.9848077, 0.17364818, 0.92387956, 0.06645227, -0.37686956, 0, 3.5, 0)
 top_level = true
 
-[node name="SpringArm" type="SpringArm3D" parent="CameraPivot" unique_id=18830901]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.6321745, 0)
-collision_mask = 0
-spring_length = 8.0
-
-[node name="Camera" type="Camera3D" parent="CameraPivot/SpringArm" unique_id=901035996]
+[node name="Camera" type="Camera3D" parent="CameraPivot" unique_id=901035996]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)
 
 [node name="HamsterWheel" type="Node3D" parent="." unique_id=2113607826]
 transform = Transform3D(-1.5298986e-07, 0, 3.5, 0, 3.5, 0, -3.5, 0, -1.5298986e-07, 0, 3.5, 0)
@@ -331,3 +490,28 @@ surface_material_override/0 = SubResource("StandardMaterial3D_knn7v")
 [node name="Cylinder" type="MeshInstance3D" parent="HamsterWheel" unique_id=1460972231]
 mesh = SubResource("ArrayMesh_ewf4h")
 surface_material_override/0 = SubResource("StandardMaterial3D_knn7v")
+
+[node name="FloorRay" type="RayCast3D" parent="." unique_id=243155117]
+
+[node name="JumpSound" type="AudioStreamPlayer3D" parent="." unique_id=499882045]
+stream = SubResource("AudioStreamRandomizer_jh3y0")
+
+[node name="StepSound" type="AudioStreamPlayer3D" parent="." unique_id=1297001091]
+unique_name_in_owner = true
+stream = SubResource("AudioStreamRandomizer_a2xo5")
+volume_db = -5.0
+
+[node name="LandSound" type="AudioStreamPlayer3D" parent="." unique_id=685534820]
+stream = SubResource("AudioStreamRandomizer_1so5t")
+
+[node name="LandWheelSound" type="AudioStreamPlayer3D" parent="." unique_id=944712919]
+stream = SubResource("AudioStreamRandomizer_55jnj")
+pitch_scale = 4.0
+
+[node name="RollSound" type="AudioStreamPlayer3D" parent="." unique_id=1123448773]
+stream = ExtResource("33_5ejfk")
+
+[node name="DustParticles" type="GPUParticles3D" parent="." unique_id=347648226]
+amount = 35
+process_material = SubResource("ParticleProcessMaterial_jh3y0")
+draw_pass_1 = SubResource("SphereMesh_1d8oa")

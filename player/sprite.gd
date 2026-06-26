@@ -46,4 +46,7 @@ func _process(delta: float) -> void:
 	if walk_frame_buffer < 0.0:
 		walk_frame_buffer = walk_speed
 		current_frame += 1
+		if frame == 0 or frame == 2:
+			%StepSound.play()
+		
 	if walking: walk_frame_buffer -= delta

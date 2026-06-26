@@ -1,12 +1,32 @@
 extends CharacterBody3D
 
-
+const RISE_GRAVITY = -30
+const FALL_GRAVITY = -70
 const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+
+const ACCEL = 15.0
+const DECEL = 15.0
+const AIR_ACCEL = 2.0
+const AIR_DECEL = 2.0
+
+const MAX_TURN_SPEED = 1.25
+const TURN_ACCEL = 0.02
+const TURN_DECEL = 0.08
+const AIR_TURN_ACCEL = 0.006
+const AIR_TURN_DECEL = 0.015
+var turn_speed = 0.0
+
+const JUMP_VELOCITY = 16
 
 const MAX_SPEED = 32
 var speed: float = 0.0
 var last_dir: float = 1.0
+var locked = true
+
+var jump_buffer = 0.0
+const JUMP_BUFFER = 0.25
+var floor_buffer = 0.0
+const FLOOR_BUFFER = 0.25
 func animate(delta: float) -> void:
 	$HamsterWheel.rotate_x(speed * PI / 32 * delta)
 	$Sprite.walking = speed != 0
@@ -14,36 +34,83 @@ func animate(delta: float) -> void:
 	rot.tween_property($Sprite, "rotation_degrees", Vector3(0, 0 if last_dir == 1 else 180, 0), 0.2)
 	$Sprite.walk_speed = remap(abs(speed), 0, MAX_SPEED, 0.2, 0.025)
 
+var was_on_floor: bool = true
+var last_floor_position: Vector3 = Vector3.ZERO
 func _physics_process(delta: float) -> void:
-
-
+	if Input.is_action_just_pressed("jump"):
+		locked = false
+		_camera.make_current()
+	
+	if is_on_floor() and !was_on_floor:
+		if jump_buffer <= 0 and floor_buffer <= 0:
+			$Sprite/AnimationPlayer.play("squash")
+			$LandSound.play()
+		$LandWheelSound.play()
+		
+	was_on_floor = is_on_floor()
 	# Add the gravity.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		var grav = FALL_GRAVITY if velocity.y < 0 else RISE_GRAVITY
+		velocity.y += grav * delta
+	
+	if $FloorRay.is_colliding():
+		last_floor_position = global_position
+	
+	if global_position.y < -10:
+		global_position = last_floor_position
+		velocity = Vector3.ZERO
+		speed = 0.0
+		turn_speed = 0.0
 #
 	## Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
+	if is_on_floor(): floor_buffer = FLOOR_BUFFER
+	if Input.is_action_just_pressed("jump"): jump_buffer = JUMP_BUFFER
+	if floor_buffer > 0 and jump_buffer > 0:
 		velocity.y = JUMP_VELOCITY
+		jump_buffer = 0
+		floor_buffer = 0
+		$Sprite/AnimationPlayer.play("strech")
+		$JumpSound.play()
+	if floor_buffer > 0: floor_buffer -= delta
+	if jump_buffer > 0: jump_buffer -= delta
+		
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var accel_dir: float = Input.get_axis("ui_down", "ui_up")
-	var turn_dir: float = Input.get_axis("ui_left", "ui_right")
-	if turn_dir: rotate_y(-turn_dir * PI * delta) 
+	var accel_dir: float = Input.get_axis("backward", "forward")
+	if locked and accel_dir < 0: accel_dir = 0
+	var turn_dir: float = Input.get_axis("turn_left", "turn_right")
+	var turn_accel = TURN_ACCEL if is_on_floor() else AIR_TURN_ACCEL
+	var turn_decel = TURN_DECEL if is_on_floor() else AIR_TURN_DECEL
+	if turn_dir and !locked: turn_speed = move_toward(turn_speed, MAX_TURN_SPEED * turn_dir, turn_accel)
+	else:turn_speed = move_toward(turn_speed, 0.0, turn_decel)
+	rotate_y(-turn_speed * TAU * delta) 
 
-	_camera_pivot.global_position = global_position
+	_camera_pivot.global_position = global_position + Vector3(0,3.5,0)
+	var accel = ACCEL if is_on_floor() or locked else AIR_ACCEL
+	var decel = DECEL if is_on_floor() or locked else AIR_DECEL
 	if accel_dir:
 		last_dir = sign(accel_dir)
-		speed = move_toward(speed, MAX_SPEED * accel_dir, delta * 8)
+		speed = move_toward(speed, MAX_SPEED * accel_dir * (1.5 if locked else 1.0), delta * accel)
 	else:
-		speed = move_toward(speed, 0.0, delta * 8)
+		speed = move_toward(speed, 0.0, delta * decel)
 	
+	$DustParticles.amount_ratio = abs(speed) / MAX_SPEED if is_on_floor() else 0.0
+	
+	if $RollSound.playing:
+		if abs(speed) + abs(turn_speed) == 0.0 or !is_on_floor(): $RollSound.stop()
+		$RollSound.pitch_scale = \
+		remap(abs(speed), 0.0, MAX_SPEED, 0.7, 2.0) + \
+		remap(abs(turn_speed), 0.0, MAX_TURN_SPEED, 0.1, 1.0)
+	else:
+		if abs(speed) + abs(turn_speed) != 0.0 or is_on_floor(): $RollSound.play()
 	animate(delta)
 		
 	var direction := (transform.basis * Vector3.BACK).normalized()
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
-
+	
+	if locked: return
 	move_and_slide()
 
 
@@ -59,6 +126,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _unhandled_input(event: InputEvent) -> void:
+	if locked: return
 	# Mouselook implemented using `screen_relative` for resolution-independent sensitivity.
 	if event is InputEventMouseMotion:
 		_camera_pivot.rotation.x -= event.screen_relative.y * mouse_sensitivity
