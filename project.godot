@@ -10,10 +10,12 @@ config_version=5
 
 [application]
 
-config/name="Spinoff"
+config/name="SpinOff"
 run/main_scene="uid://b5txwfsm6vp1o"
 config/features=PackedStringArray("4.7", "GL Compatibility")
-config/icon="res://icon.svg"
+boot_splash/bg_color=Color(0, 0, 0, 1)
+boot_splash/show_image=false
+config/icon="uid://8mg8p3hk7lgg"
 
 [display]
 
@@ -69,5 +71,4 @@ jump={
 [rendering]
 
 rendering_device/driver.windows="d3d12"
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method.mobile="forward_plus"

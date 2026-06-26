@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody3D
 
 const RISE_GRAVITY: float = -30
@@ -22,6 +23,7 @@ const MAX_SPEED: float = 32.0
 var speed: float = 0.0
 var last_dir: float = 1.0
 var locked: bool = true
+var accel_dir: float = 0.0
 
 var jump_buffer: float = 0.0
 const JUMP_BUFFER: float = 0.25
@@ -31,13 +33,17 @@ func animate(delta: float) -> void:
 	$HamsterWheel.rotate_x(speed * PI / 32 * delta)
 	$Sprite.walking = speed != 0
 	var rot = create_tween()
-	rot.tween_property($Sprite, "rotation_degrees", Vector3(0, 0 if last_dir == 1 else 180, 0), 0.2)
+	rot.tween_property($Sprite, "rotation_degrees", Vector3(0, 180 if (accel_dir == -1.0) else 0, 0), 0.2)
 	$Sprite.walk_speed = clamp(remap(abs(speed), 0, MAX_SPEED, 0.2, 0.025), 0.025, 0.2)
 
 var was_on_floor: bool = true
 var last_floor_position: Vector3 = Vector3.ZERO
 func _physics_process(delta: float) -> void:
-	if speed >= MAX_SPEED * 1.5:
+	if is_on_wall():
+		if abs(speed) > 10:
+			velocity.y = max(abs(speed) / MAX_SPEED * 20.0, 5.0)
+		speed = min(abs(speed), 10.0) * -sign(speed)
+	if speed >= MAX_SPEED * 1.5 or true:
 		locked = false
 		_camera.make_current()
 	
@@ -52,7 +58,7 @@ func _physics_process(delta: float) -> void:
 		
 	was_on_floor = is_on_floor()
 	# Add the gravity.
-	if not is_on_floor():
+	if not is_on_floor() and !locked:
 		var grav = FALL_GRAVITY if velocity.y < 0 else RISE_GRAVITY
 		velocity.y += grav * delta
 	
@@ -66,7 +72,7 @@ func _physics_process(delta: float) -> void:
 		turn_speed = 0.0
 #
 
-	if abs(speed) > 0.0 and is_on_floor():
+	if abs(speed) > 0.0 and (is_on_floor() or locked):
 		$Sprite/AnimationPlayer.speed_scale = remap(abs(speed), 0.0, MAX_SPEED, 0.1, 1.0)
 		if !$Sprite/AnimationPlayer.is_playing() and $Sprite/AnimationPlayer.current_animation != "hops":
 			$Sprite/AnimationPlayer.play("hops")
@@ -93,7 +99,7 @@ func _physics_process(delta: float) -> void:
 
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
-	var accel_dir: float = Input.get_axis("backward", "forward")
+	accel_dir = Input.get_axis("backward", "forward")
 	if locked and accel_dir < 0: accel_dir = 0
 	var turn_dir: float = Input.get_axis("turn_left", "turn_right")
 	var turn_accel = TURN_ACCEL if is_on_floor() else AIR_TURN_ACCEL

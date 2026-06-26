@@ -43,7 +43,7 @@ func _process(delta: float) -> void:
 		walk_frame_buffer = walk_speed
 		animation = new_animation
 	
-	if !get_parent().is_on_floor():
+	if !get_parent().is_on_floor() and !get_parent().locked:
 		frame = 1
 		return
 	if walk_frame_buffer < 0.0:

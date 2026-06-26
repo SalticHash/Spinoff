@@ -9,4 +9,6 @@ Wheel step sound by [freesound_community](https://pixabay.com/users/freesound_co
 - https://pixabay.com/sound-effects/film-special-effects-screen-tap-38717/
 - Edited for my needs
 
-Logo font - Albert Sans
+Game and logo font - Albert Sans
+
+Chomp sound from Scratch
