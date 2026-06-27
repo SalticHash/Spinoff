@@ -1,0 +1,120 @@
+[gd_scene format=3 uid="uid://civ20xv5mrsug"]
+
+[ext_resource type="Script" uid="uid://di0b8j4xfacop" path="res://watermelon/watermelon.gd" id="1_ifqau"]
+[ext_resource type="Texture2D" uid="uid://batls6yf5xf3t" path="res://watermelon/watermelon.png" id="2_a6gkr"]
+[ext_resource type="AudioStream" uid="uid://b284xt26uu41q" path="res://watermelon/Chomp.wav" id="3_gcqil"]
+[ext_resource type="AudioStream" uid="uid://46dauahvyii2" path="res://watermelon/FireworkWhistle.wav" id="4_f77iu"]
+[ext_resource type="AudioStream" uid="uid://cn7yuh1ky3rb8" path="res://watermelon/Explosion.wav" id="5_57wn4"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_jh3y0"]
+radius = 9.0
+
+[sub_resource type="AudioStreamSynchronized" id="AudioStreamSynchronized_b5y06"]
+stream_count = 2
+stream_0/stream = ExtResource("3_gcqil")
+stream_0/volume = 0.0
+stream_1/stream = ExtResource("4_f77iu")
+stream_1/volume = 0.0
+
+[sub_resource type="Curve" id="Curve_ifqau"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_a6gkr"]
+curve = SubResource("Curve_ifqau")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gcqil"]
+lifetime_randomness = 0.6
+emission_shape_scale = Vector3(6, 6, 6)
+emission_shape = 1
+emission_sphere_radius = 1.0
+spread = 180.0
+initial_velocity_min = 8.86
+initial_velocity_max = 46.41
+gravity = Vector3(0, 0, 0)
+scale_min = 0.55
+scale_curve = SubResource("CurveTexture_a6gkr")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_f77iu"]
+albedo_color = Color(1, 0.17000002, 0.32216674, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_57wn4"]
+material = SubResource("StandardMaterial3D_f77iu")
+radius = 1.29
+height = 2.58
+
+[sub_resource type="Curve" id="Curve_6gue5"]
+_data = [Vector2(0.45219642, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ai45w"]
+curve = SubResource("Curve_6gue5")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_d1d1x"]
+lifetime_randomness = 0.25
+emission_shape_scale = Vector3(6, 6, 6)
+emission_shape = 1
+emission_sphere_radius = 1.0
+gravity = Vector3(0, 0, 0)
+scale_min = 0.55
+scale_curve = SubResource("CurveTexture_ai45w")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sc4t8"]
+albedo_color = Color(1, 0.17000002, 0.32216674, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_jh3y0"]
+material = SubResource("StandardMaterial3D_sc4t8")
+radius = 1.29
+height = 2.58
+
+[node name="WatermelonBIG" type="RigidBody3D" unique_id=1212779573]
+collision_layer = 4
+collision_mask = 3
+gravity_scale = 0.0
+contact_monitor = true
+max_contacts_reported = 4
+script = ExtResource("1_ifqau")
+
+[node name="Collision" type="CollisionShape3D" parent="." unique_id=1925497920]
+shape = SubResource("SphereShape3D_jh3y0")
+
+[node name="Sprite" type="Sprite3D" parent="." unique_id=1538443753]
+transform = Transform3D(16.56, 0, 0, 0, 16.56, 0, 0, 0, 16.56, 0, 0, 0)
+billboard = 2
+texture_filter = 2
+texture = ExtResource("2_a6gkr")
+
+[node name="Chomp" type="AudioStreamPlayer3D" parent="." unique_id=1569541140]
+stream = SubResource("AudioStreamSynchronized_b5y06")
+volume_db = 10.0
+unit_size = 20.0
+pitch_scale = 0.58
+
+[node name="Explode" type="GPUParticles3D" parent="." unique_id=1112477232]
+top_level = true
+emitting = false
+amount = 400
+lifetime = 3.0
+one_shot = true
+explosiveness = 1.0
+process_material = SubResource("ParticleProcessMaterial_gcqil")
+draw_pass_1 = SubResource("SphereMesh_57wn4")
+
+[node name="Fly" type="GPUParticles3D" parent="." unique_id=387403769]
+emitting = false
+amount = 50
+lifetime = 0.5
+process_material = SubResource("ParticleProcessMaterial_d1d1x")
+draw_pass_1 = SubResource("SphereMesh_jh3y0")
+
+[node name="Timer" type="Timer" parent="." unique_id=1771226321]
+wait_time = 2.5
+one_shot = true
+
+[node name="ExplodeSound" type="AudioStreamPlayer3D" parent="." unique_id=1407446239]
+stream = ExtResource("5_57wn4")
+volume_db = 10.0
+unit_size = 50.21
+pitch_scale = 0.27
+
+[connection signal="timeout" from="Timer" to="." method="explode"]

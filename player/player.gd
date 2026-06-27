@@ -1,6 +1,8 @@
 class_name Player
 extends CharacterBody3D
 
+var max_locked: bool = true
+var follow: Node3D = null
 const RISE_GRAVITY: float = -30
 const FALL_GRAVITY: float = -70
 const SPEED: float = 5.0
@@ -39,9 +41,17 @@ func animate(delta: float) -> void:
 var was_on_floor: bool = false
 var last_floor_position: Vector3 = Vector3.ZERO
 
+func _ready() -> void:
+	Global.explode.connect(func(): hide())
+	Global.dialog_ended.connect(func(): max_locked = false)
 var wall_stun: float = 0.0
 var WALL_STUN: float = 0.1
 func _physics_process(delta: float) -> void:
+	if follow and follow.is_inside_tree():
+		$Collision.disabled = true
+		Global.end = true
+		global_position = follow.global_position + Vector3(0, -4, 2)
+	if max_locked: return
 	if $WallRay/Coll.disabled:
 		wall_stun -= delta
 	if wall_stun <= 0.0:
@@ -50,11 +60,12 @@ func _physics_process(delta: float) -> void:
 		$WallRay/Coll.disabled = true
 		wall_stun = WALL_STUN
 		if abs(speed) > 10:
-			velocity.y = max(abs(speed) / MAX_SPEED * 20.0, 5.0)
+			velocity.y = max(abs(speed) / MAX_SPEED * JUMP_VELOCITY, 5.0)
 		speed = min(abs(speed), 10.0) * -sign(speed)
 	
-	if speed >= MAX_SPEED * 1.5 or true:
+	if speed >= MAX_SPEED * 1.5:
 		locked = false
+		Global.set_free.emit()
 		_camera.make_current()
 	
 	if is_on_floor() and !was_on_floor:

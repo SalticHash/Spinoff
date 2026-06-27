@@ -5,10 +5,131 @@
 [ext_resource type="Texture2D" uid="uid://7rcrybksnxuw" path="res://box/box_icon.png" id="2_vkava"]
 [ext_resource type="Texture2D" uid="uid://batls6yf5xf3t" path="res://watermelon/watermelon.png" id="3_tf0e0"]
 [ext_resource type="FontFile" uid="uid://tthvwfsswj2t" path="res://main_menu/font/AlbertSans-BlackItalic.ttf" id="3_vkava"]
+[ext_resource type="Texture2D" uid="uid://d21udjtlbwkfa" path="res://ui/dialogs/mrmonigote.png" id="6_ay4pc"]
+[ext_resource type="Texture2D" uid="uid://d0a6lfb5uxfb3" path="res://mrmonigote/sad.png" id="6_hrmpd"]
+[ext_resource type="FontFile" uid="uid://yr5gs2q5ol3k" path="res://main_menu/font/AlbertSans-Medium.ttf" id="7_bi8hs"]
+[ext_resource type="FontFile" uid="uid://cwsymqed378fd" path="res://main_menu/font/AlbertSans-Bold.ttf" id="8_hrmpd"]
+[ext_resource type="FontFile" uid="uid://b86dt0jbjktn8" path="res://main_menu/font/AlbertSans-BoldItalic.ttf" id="9_x7jpl"]
+[ext_resource type="FontFile" uid="uid://cxuhqjnaefy2e" path="res://main_menu/font/AlbertSans-MediumItalic.ttf" id="10_os0ka"]
+[ext_resource type="AudioStream" uid="uid://psdnem7qm37r" path="res://mrmonigote/talk.wav" id="11_bi8hs"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_obcwv"]
 font = ExtResource("3_vkava")
 font_color = Color(0, 0, 0, 1)
+
+[sub_resource type="AudioStreamRandomizer" id="AudioStreamRandomizer_jh3y0"]
+random_pitch = 1.0293022
+streams_count = 1
+stream_0/stream = ExtResource("11_bi8hs")
+
+[sub_resource type="Animation" id="Animation_ay4pc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flash:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Text:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Text:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_bi8hs"]
+resource_name = "flash"
+length = 30.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Flash:color")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.43333334, 3, 5.4333334, 8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0), Color(0, 0, 0, 0), Color(0, 0, 0, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("TextureRect:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(10.5, 12.966666, 25.033333, 29.366667),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Text:visible_ratio")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(13.133333, 22.833334),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 1.0]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Text:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(25.0333, 29.3667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hrmpd"]
+_data = {
+&"RESET": SubResource("Animation_ay4pc"),
+&"flash": SubResource("Animation_bi8hs")
+}
 
 [node name="UI" type="Control" unique_id=482880489]
 layout_mode = 3
@@ -20,7 +141,17 @@ grow_vertical = 2
 mouse_filter = 2
 script = ExtResource("1_wl5ax")
 
-[node name="TextureRect" type="TextureRect" parent="." unique_id=1095823071]
+[node name="GUI" type="Control" parent="." unique_id=47573168]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PaperSheet" type="TextureRect" parent="GUI" unique_id=1095823071]
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -32,7 +163,7 @@ offset_bottom = 6.0
 texture = ExtResource("2_tf0e0")
 expand_mode = 1
 
-[node name="Counters" type="VBoxContainer" parent="." unique_id=1119377744]
+[node name="Counters" type="VBoxContainer" parent="GUI" unique_id=1119377744]
 layout_mode = 1
 anchors_preset = 2
 anchor_top = 1.0
@@ -43,30 +174,240 @@ offset_right = 236.0
 offset_bottom = -16.0
 grow_vertical = 0
 
-[node name="Boxes" type="HBoxContainer" parent="Counters" unique_id=500513687]
+[node name="Boxes" type="HBoxContainer" parent="GUI/Counters" unique_id=500513687]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Icon" type="TextureRect" parent="Counters/Boxes" unique_id=1674670443]
+[node name="Icon" type="TextureRect" parent="GUI/Counters/Boxes" unique_id=1674670443]
 layout_mode = 2
 texture = ExtResource("2_vkava")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="Counters/Boxes" unique_id=2142974091]
+[node name="Label" type="Label" parent="GUI/Counters/Boxes" unique_id=2142974091]
 layout_mode = 2
 text = "Boxes: 0"
 label_settings = SubResource("LabelSettings_obcwv")
 
-[node name="Melons" type="HBoxContainer" parent="Counters" unique_id=1355648740]
+[node name="Melons" type="HBoxContainer" parent="GUI/Counters" unique_id=1355648740]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Icon" type="TextureRect" parent="Counters/Melons" unique_id=2093679940]
+[node name="Icon" type="TextureRect" parent="GUI/Counters/Melons" unique_id=2093679940]
 layout_mode = 2
 texture = ExtResource("3_tf0e0")
 expand_mode = 2
 
-[node name="Label" type="Label" parent="Counters/Melons" unique_id=217214999]
+[node name="Label" type="Label" parent="GUI/Counters/Melons" unique_id=217214999]
 layout_mode = 2
 text = "Melons: 0"
 label_settings = SubResource("LabelSettings_obcwv")
+
+[node name="Flash" type="ColorRect" parent="." unique_id=2014831373]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(1, 1, 1, 0)
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=323060355]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 0
+offset_left = -55.0
+offset_top = -88.0
+offset_right = 286.0
+offset_bottom = 363.0
+mouse_filter = 2
+texture = ExtResource("6_hrmpd")
+
+[node name="Text" type="RichTextLabel" parent="." unique_id=953684230]
+layout_mode = 0
+offset_left = 207.0
+offset_top = 53.0
+offset_right = 539.0
+offset_bottom = 289.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+mouse_filter = 2
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("7_bi8hs")
+theme_override_fonts/bold_font = ExtResource("8_hrmpd")
+theme_override_fonts/bold_italics_font = ExtResource("9_x7jpl")
+theme_override_fonts/italics_font = ExtResource("10_os0ka")
+theme_override_font_sizes/normal_font_size = 24
+bbcode_enabled = true
+text = "The life of a respected hamster, has been cut short...
+
+But sometimes, we have to look for hapiness in the present moment, and be grateful for the memories we made together...."
+scroll_active = false
+visible_characters = 0
+visible_characters_behavior = 1
+visible_ratio = 0.0
+
+[node name="Dialog" type="Control" parent="." unique_id=1188571694]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+mouse_filter = 2
+
+[node name="PaperSheet" type="TextureRect" parent="Dialog" unique_id=320413117]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -144.0
+offset_right = 342.0
+offset_bottom = 8.0
+texture = ExtResource("2_tf0e0")
+expand_mode = 1
+
+[node name="Monigote" type="TextureRect" parent="Dialog/PaperSheet" unique_id=654157642]
+layout_mode = 0
+offset_left = 21.0
+offset_top = -8.0
+offset_right = 137.0
+offset_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+texture = ExtResource("6_ay4pc")
+expand_mode = 1
+
+[node name="Text" type="RichTextLabel" parent="Dialog" unique_id=1221845336]
+layout_mode = 0
+offset_left = 121.0
+offset_top = -121.0
+offset_right = 320.0
+offset_bottom = -17.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_bi8hs")
+theme_override_fonts/bold_font = ExtResource("8_hrmpd")
+theme_override_fonts/bold_italics_font = ExtResource("9_x7jpl")
+theme_override_fonts/italics_font = ExtResource("10_os0ka")
+bbcode_enabled = true
+text = "Good morning! My name is Mr. Monigote. Your job is to spin this wheel to generate electricity for our company!"
+scroll_active = false
+visible_characters_behavior = 1
+
+[node name="Chirp" type="AudioStreamPlayer" parent="Dialog" unique_id=353805192]
+stream = SubResource("AudioStreamRandomizer_jh3y0")
+
+[node name="Dialogs" type="Control" parent="." unique_id=1377010657]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Dialog2" type="Control" parent="Dialogs" unique_id=1229438563]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="PaperSheet" type="TextureRect" parent="Dialogs/Dialog2" unique_id=1614037556]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -144.0
+offset_right = 342.0
+offset_bottom = 8.0
+texture = ExtResource("2_tf0e0")
+expand_mode = 1
+
+[node name="Monigote" type="TextureRect" parent="Dialogs/Dialog2/PaperSheet" unique_id=1097850932]
+layout_mode = 0
+offset_left = 21.0
+offset_top = -8.0
+offset_right = 137.0
+offset_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+texture = ExtResource("6_ay4pc")
+expand_mode = 1
+
+[node name="Text" type="RichTextLabel" parent="Dialogs/Dialog2" unique_id=335237189]
+layout_mode = 0
+offset_left = 121.0
+offset_top = -121.0
+offset_right = 320.0
+offset_bottom = -17.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_bi8hs")
+theme_override_fonts/bold_font = ExtResource("8_hrmpd")
+theme_override_fonts/bold_italics_font = ExtResource("9_x7jpl")
+theme_override_fonts/italics_font = ExtResource("10_os0ka")
+bbcode_enabled = true
+text = "I will leave now to let you work in peace, don't break the equipment and DON'T make a mess out of the office space!"
+scroll_active = false
+
+[node name="Dialog3" type="Control" parent="Dialogs" unique_id=943618601]
+visible = false
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+
+[node name="PaperSheet" type="TextureRect" parent="Dialogs/Dialog3" unique_id=1575980039]
+clip_children = 2
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = -3.0
+offset_top = -144.0
+offset_right = 342.0
+offset_bottom = 8.0
+texture = ExtResource("2_tf0e0")
+expand_mode = 1
+
+[node name="Monigote" type="TextureRect" parent="Dialogs/Dialog3/PaperSheet" unique_id=1914874019]
+layout_mode = 0
+offset_left = 21.0
+offset_top = -8.0
+offset_right = 137.0
+offset_bottom = 144.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.25
+texture = ExtResource("6_ay4pc")
+expand_mode = 1
+
+[node name="Text" type="RichTextLabel" parent="Dialogs/Dialog3" unique_id=758528754]
+layout_mode = 0
+offset_left = 121.0
+offset_top = -121.0
+offset_right = 320.0
+offset_bottom = -17.0
+size_flags_horizontal = 3
+size_flags_stretch_ratio = 0.75
+theme_override_colors/default_color = Color(0, 0, 0, 1)
+theme_override_fonts/normal_font = ExtResource("7_bi8hs")
+theme_override_fonts/bold_font = ExtResource("8_hrmpd")
+theme_override_fonts/bold_italics_font = ExtResource("9_x7jpl")
+theme_override_fonts/italics_font = ExtResource("10_os0ka")
+bbcode_enabled = true
+text = "Here at Serious Corp we apreciate efficency and seriousness! Don't fool around and don't dissapoint! "
+scroll_active = false
+
+[node name="Explosion" type="AnimationPlayer" parent="." unique_id=1122250525]
+libraries/ = SubResource("AnimationLibrary_hrmpd")

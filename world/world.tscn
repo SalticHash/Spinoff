@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cagn44r325fe7" path="res://box/box.tscn" id="2_tcf2h"]
 [ext_resource type="PackedScene" uid="uid://cc63fs76sfts0" path="res://player/wheel_stand.tscn" id="3_mmdvd"]
 [ext_resource type="PackedScene" uid="uid://creq0wfpbhlv7" path="res://watermelon/watermelon.tscn" id="4_h5o24"]
+[ext_resource type="PackedScene" uid="uid://civ20xv5mrsug" path="res://watermelon/watermelon_BIG.tscn" id="6_ai45w"]
 [ext_resource type="PackedScene" uid="uid://omoph7s6w4ka" path="res://ui/ui.tscn" id="7_sc4t8"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h5o24"]
@@ -497,8 +498,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -199, 1.5, 208)
 [node name="Watermelon10" parent="World" unique_id=492769200 instance=ExtResource("4_h5o24")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.5, 170)
 
-[node name="Watermelon7" parent="World" unique_id=1064959878 instance=ExtResource("4_h5o24")]
-transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, -196, 11.5, 99)
+[node name="WatermelonBIG" parent="World" unique_id=1946354954 instance=ExtResource("6_ai45w")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -196, 11.5, 99)
 
 [node name="Watermelon5" parent="World" unique_id=903210680 instance=ExtResource("4_h5o24")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -188, 1.5, 164)
@@ -508,5 +509,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -204, 1.5, 180)
 
 [node name="Stand" parent="World" unique_id=1804393402 instance=ExtResource("3_mmdvd")]
 transform = Transform3D(0.715, 0, 0, 0, 0.715, 0, 0, 0, 0.715, 0.382, 0.918, 2.986)
+
+[node name="ExplodeCamera" type="Camera3D" parent="World" unique_id=1872556994]
+transform = Transform3D(0.8870108, 0.20241727, 0.4150169, 0, 0.89879405, -0.43837115, -0.4617486, 0.38883996, 0.79724, -188.00002, 2, 112)
 
 [node name="UI" parent="." unique_id=482880489 instance=ExtResource("7_sc4t8")]
