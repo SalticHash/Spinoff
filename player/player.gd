@@ -38,11 +38,21 @@ func animate(delta: float) -> void:
 
 var was_on_floor: bool = false
 var last_floor_position: Vector3 = Vector3.ZERO
+
+var wall_stun: float = 0.0
+var WALL_STUN: float = 0.1
 func _physics_process(delta: float) -> void:
-	if is_on_wall():
+	if $WallRay/Coll.disabled:
+		wall_stun -= delta
+	if wall_stun <= 0.0:
+		$WallRay/Coll.disabled = false
+	if $WallRay.has_overlapping_bodies():
+		$WallRay/Coll.disabled = true
+		wall_stun = WALL_STUN
 		if abs(speed) > 10:
 			velocity.y = max(abs(speed) / MAX_SPEED * 20.0, 5.0)
 		speed = min(abs(speed), 10.0) * -sign(speed)
+	
 	if speed >= MAX_SPEED * 1.5 or true:
 		locked = false
 		_camera.make_current()

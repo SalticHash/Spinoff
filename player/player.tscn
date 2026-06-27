@@ -469,6 +469,9 @@ material = SubResource("StandardMaterial3D_5ejfk")
 radius = 0.2
 height = 0.4
 
+[sub_resource type="BoxShape3D" id="BoxShape3D_jh3y0"]
+size = Vector3(1.477, 0.639, 7.445)
+
 [node name="Player" type="CharacterBody3D" unique_id=791315332]
 collision_layer = 2
 script = ExtResource("1_knn7v")
@@ -495,10 +498,6 @@ libraries/ = SubResource("AnimationLibrary_rptt4")
 [node name="Collision" type="CollisionShape3D" parent="." unique_id=1113271361]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 3.5, 0)
 shape = SubResource("CylinderShape3D_7pqkx")
-
-[node name="RayCast3D" type="RayCast3D" parent="." unique_id=341140028]
-transform = Transform3D(0.70710665, 0, -0.7071069, 0, 1, 0, 0.7071069, 0, 0.70710665, 2.0888762, 0, 2.1837916)
-target_position = Vector3(0, 0, -1)
 
 [node name="CameraPivot" type="Node3D" parent="." unique_id=1316340489]
 unique_name_in_owner = true
@@ -571,3 +570,9 @@ amount = 35
 amount_ratio = 0.0
 process_material = SubResource("ParticleProcessMaterial_jh3y0")
 draw_pass_1 = SubResource("SphereMesh_1d8oa")
+
+[node name="WallRay" type="Area3D" parent="." unique_id=290522252]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.54, 0)
+
+[node name="Coll" type="CollisionShape3D" parent="WallRay" unique_id=747759846]
+shape = SubResource("BoxShape3D_jh3y0")

@@ -1,9 +1,18 @@
 [gd_scene format=3 uid="uid://cagn44r325fe7"]
 
+[ext_resource type="Texture2D" uid="uid://sdu7hf7myual" path="res://box/box.png" id="1_e5lxm"]
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_fufnd"]
 size = Vector3(3, 3, 3)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dx5ib"]
+albedo_texture = ExtResource("1_e5lxm")
+uv1_scale = Vector3(0.335, 0.335, 0.335)
+uv1_offset = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
 [sub_resource type="BoxMesh" id="BoxMesh_e5lxm"]
+material = SubResource("StandardMaterial3D_dx5ib")
 size = Vector3(3, 3, 3)
 
 [node name="Box" type="RigidBody3D" unique_id=1176367598]
