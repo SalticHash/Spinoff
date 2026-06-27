@@ -12,8 +12,8 @@ dest_files=["res://.godot/imported/stillmusic.mp3-c0d13962abe78adcd81ded2f25f776
 
 [params]
 
-loop=false
-loop_offset=0
-bpm=0
+loop=true
+loop_offset=0.0
+bpm=0.0
 beat_count=0
 bar_beats=4

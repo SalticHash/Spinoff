@@ -17,6 +17,8 @@ Bowling pin sound:
 
 Game and logo font - Albert Sans
 
+Music from Mario Galaxy
+
 Chomp sound from Scratch
 
 Level designer, Block texture, Unused TNT texture - AndresCarmiol

@@ -40,6 +40,8 @@
 [ext_resource type="AudioStream" uid="uid://dffhehwbwjdf0" path="res://player/sounds/land_wheel/3.ogg" id="33_55jnj"]
 [ext_resource type="AudioStream" uid="uid://cb5jd82u0tjde" path="res://player/sounds/land_wheel/4.ogg" id="34_dx5ib"]
 [ext_resource type="AudioStream" uid="uid://b07knxxpnfhra" path="res://player/sounds/land_wheel/5.ogg" id="35_a2xo5"]
+[ext_resource type="AudioStream" uid="uid://cg7tu6r4u8lk8" path="res://player/sounds/stillmusic.mp3" id="41_art4l"]
+[ext_resource type="AudioStream" uid="uid://bmla2wh8dt6hm" path="res://player/sounds/movemusic.mp3" id="42_fjxoa"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_mmwog"]
 animations = [{
@@ -576,3 +578,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.54, 0)
 
 [node name="Coll" type="CollisionShape3D" parent="WallRay" unique_id=747759846]
 shape = SubResource("BoxShape3D_jh3y0")
+
+[node name="StillMusic" type="AudioStreamPlayer" parent="." unique_id=504874907]
+stream = ExtResource("41_art4l")
+
+[node name="MoveMusic" type="AudioStreamPlayer" parent="." unique_id=1877414034]
+stream = ExtResource("42_fjxoa")

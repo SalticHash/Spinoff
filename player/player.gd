@@ -149,8 +149,14 @@ func _physics_process(delta: float) -> void:
 		if abs(speed) + abs(turn_speed) != 0.0 or is_on_floor(): $RollSound.play()
 	animate(delta)
 	
-		
-		
+	if abs(speed) > 0.0:
+		if !$MoveMusic.playing: $MoveMusic.play()
+		$MoveMusic.pitch_scale = remap(abs(speed), 0.0, MAX_SPEED, 0.75, 1.25)
+		$MoveMusic.volume_linear = remap(abs(speed), 0.0, MAX_SPEED, 0.1, 0.2)
+	else:
+		$MoveMusic.pitch_scale = 0.01
+		$MoveMusic.volume_linear = 0.01
+
 	var direction := (transform.basis * Vector3.BACK).normalized()
 	velocity.x = direction.x * speed
 	velocity.z = direction.z * speed
