@@ -159,7 +159,7 @@ func _physics_process(delta: float) -> void:
 @export var tilt_limit = deg_to_rad(75)
 
 
-func _input(event: InputEvent) -> void:
+func _unhandled_input(event: InputEvent) -> void:
 	if locked: return
 	# Mouselook implemented using `screen_relative` for resolution-independent sensitivity.
 	if event is InputEventMouseMotion:
