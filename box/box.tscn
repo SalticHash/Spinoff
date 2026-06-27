@@ -50,3 +50,4 @@ mesh = SubResource("BoxMesh_e5lxm")
 
 [node name="KnockSound" type="AudioStreamPlayer3D" parent="." unique_id=304774112]
 stream = SubResource("AudioStreamRandomizer_jh3y0")
+volume_db = -15.04
